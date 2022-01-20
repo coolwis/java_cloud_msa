@@ -1,0 +1,14 @@
+package com.psc.cloud.review.domain;
+
+import java.util.List;
+
+//import javax.transaction.Transactional;
+
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.transaction.annotation.Transactional;
+
+public interface ReviewRepository extends CrudRepository<ReviewEntity, Integer>{
+
+	@Transactional(readOnly =true)
+	List<ReviewEntity> findByProductId(int productId);
+}

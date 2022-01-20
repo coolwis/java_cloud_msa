@@ -1,0 +1,24 @@
+
+server:
+  port: 7000
+app:
+  product:
+    protocol: http
+    host: localhost
+    service: product
+    port: 7001
+  recommend:
+    protocol: http
+    host: localhost
+    service: recommend
+    port: 7002
+  review:
+    protocol: http
+    host: localhost
+    service: review
+    port: 7003    
+    
+logging:
+  level:
+    root: INFO
+    com.psc.cloud.composite: DEBUG    
