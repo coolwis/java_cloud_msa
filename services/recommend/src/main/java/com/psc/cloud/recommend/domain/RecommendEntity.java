@@ -15,7 +15,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @Document(collection="recommends")
-@CompoundIndex(name ="prod-rec-id", unique=true, def="{'productId':1, 'recommandId':1}")
+@CompoundIndex(name ="prod-rec-id", unique=true, def="{'productId':1, 'recommendId':1}")
 public class RecommendEntity {
 
 	
@@ -24,13 +24,13 @@ public class RecommendEntity {
 	@Version
 	private Integer version;
 	private int productId;
-	private int recommandId;
+	private int recommendId;
 	private String author;
 	private String content;
 	
-	public RecommendEntity(int productId, int recommandId, String author, String content) {
+	public RecommendEntity(int productId, int recommendId, String author, String content) {
 		this.productId =productId; 
-		this.recommandId = recommandId; 
+		this.recommendId = recommendId; 
 		this.author= author;
 		this.content  = content;
 	}
