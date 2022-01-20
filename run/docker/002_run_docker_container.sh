@@ -10,31 +10,31 @@ sudo docker run -d --rm --name mysqlDB \
 		mysql:5.7
 	
 		
-sudo docker  run -d --rm --name mongoDB \
+sudo docker run -d --rm --name mongoDB \
 		--network apps_net \
 		-p 27017:27017 \
 		mongo:3.6.9 \
 		mongod --smallfiles
 		
-sudo docker run -d  --rm --name composite \
-		--network apps_net
+sudo docker run -d --rm --name composite \
+		--network apps_net \
 		-e SPRING_PROFILES_ACTIVE=docker \
 		-p 8080:8080 \
 		composite
 		
 		
-sudo docker run -d  --rm --name product \
-		--network apps_net
+sudo docker run -d --rm --name product \
+		--network apps_net \
 		-e SPRING_PROFILES_ACTIVE=docker \
 		product
 		
-sudo docker run -d  --rm --name review \
-		--network apps_net
+sudo docker run -d --rm --name review \
+		--network apps_net \
 		-e SPRING_PROFILES_ACTIVE=docker \
 		review
 
-sudo docker run -d  --rm --name recommend \
-		--network apps_net
+sudo docker run -d --rm --name recommend \
+		--network apps_net \
 		-e SPRING_PROFILES_ACTIVE=docker \
 		recommend
 		
