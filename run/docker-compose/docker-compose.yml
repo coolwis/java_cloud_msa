@@ -52,9 +52,9 @@ services:
       - MYSQL_ROOT_PASSWORD=password
       - MYSQL_DATABASE=review-db
       - MYSQL_USER=user01
-      - MYSQL_PASSWORD=password
+      - MYSQL_PASSWORD=user01
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-uuser01", "-ppassword", "-h", "localhost"]
+      test: ["CMD", "mysqladmin", "ping", "-uuser01", "-puser01", "-h", "localhost"]
       interval: 10s
       timeout: 5s
       retries: 10              
