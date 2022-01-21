@@ -44,10 +44,14 @@ public class IntegrateModule
 	) {
 		this.restTemplate = restTemplate;
 		this.mapper = mapper;
-		this.productServiceUrl = productProtocal = "://" + productHost + ":" + productPort + "/" + productService;
-		this.recommendServiceUrl = recommendProtocal = "://" + recommendHost + ":" + recommendPort + "/"
+		this.productServiceUrl = productProtocal + "://" + productHost + ":" + productPort + "/" + productService;
+		this.recommendServiceUrl = recommendProtocal + "://" + recommendHost + ":" + recommendPort + "/"
 				+ recommendService;
-		this.reviewServiceUrl = reviewProtocal = "://" + reviewHost + ":" + reviewPort + "/" + reviewService;
+		this.reviewServiceUrl = reviewProtocal + "://" + reviewHost + ":" + reviewPort + "/" + reviewService;
+		
+		log.debug("IntegrateModule product url:{}", this.productServiceUrl);
+		log.debug("IntegrateModule recommend url:{}", this.recommendServiceUrl);
+		log.debug("IntegrateModule review url:{}", this.reviewServiceUrl);
 	}
 
 	private RuntimeException httpClientException(HttpClientErrorException ex) {
@@ -104,6 +108,9 @@ public class IntegrateModule
 		try {
 
 			String url = productServiceUrl;
+			
+			log.debug("createProduct url:{}", url);
+			log.debug("createProduct body:{}", body.toString());
 			Product product = restTemplate.postForObject(url, body, Product.class);
 			return product;
 		} catch (HttpClientErrorException ex) {
