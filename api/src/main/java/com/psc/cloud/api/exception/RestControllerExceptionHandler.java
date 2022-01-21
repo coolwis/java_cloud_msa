@@ -18,7 +18,7 @@ import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY;
 @RestControllerAdvice
 public class RestControllerExceptionHandler {
 
-	//restcontroller에서 notFound Exception 발생시
+	//restcontroller-> notFound Exception
     @ResponseStatus(NOT_FOUND)
     @ExceptionHandler(NotFoundException.class)
     public @ResponseBody

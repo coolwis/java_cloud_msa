@@ -14,7 +14,7 @@ public interface ReviewControllerInterface {
     )
     Review createReview(@RequestBody Review body);
 
-    //@RequestParam: parameter·Î Àü´Þ
+    //@RequestParam: parameter send
     @GetMapping(
             value    = "/review",
             produces = "application/json"

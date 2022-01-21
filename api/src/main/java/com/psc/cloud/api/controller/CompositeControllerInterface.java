@@ -11,7 +11,7 @@ public interface CompositeControllerInterface {
     )
     void createComposite(@RequestBody Composite body);
 
-    //@PathVariable·Î Àü´Þ
+    //@PathVariable use Send parameter
     @GetMapping(
             value    = "/composite/{productId}",
             produces = "application/json"
