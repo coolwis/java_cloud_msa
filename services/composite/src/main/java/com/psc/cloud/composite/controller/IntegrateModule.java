@@ -1,8 +1,17 @@
 package com.psc.cloud.composite.controller;
 
+//import java.net.http.HttpHeaders;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -18,6 +27,8 @@ import com.psc.cloud.api.exception.InvalidInputException;
 import com.psc.cloud.api.exception.NotFoundException;
 
 import lombok.extern.slf4j.Slf4j;
+
+import static org.springframework.http.HttpMethod.GET;
 
 @Slf4j
 @Component
@@ -69,38 +80,100 @@ public class IntegrateModule
 
 	@Override
 	public Review createReview(Review body) {
+		try {
 
-		return null;
+			String url = reviewServiceUrl;
+			HttpHeaders headers =new HttpHeaders();
+			headers.setContentType(MediaType.APPLICATION_JSON);
+			log.debug("create review url:{}", url);
+			log.debug("create review body:{}", body.toString());
+
+			HttpEntity<Review> entity =new HttpEntity<>(body, headers);
+
+			Review review= restTemplate.postForObject(url, entity, Review.class);
+			return review;
+		} catch (HttpClientErrorException ex) {
+			throw httpClientException(ex);
+		}
 	}
 
 	@Override
 	public List<Review> getReviews(int productId) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			String url = reviewServiceUrl + "/" + productId;
+			ParameterizedTypeReference<List<Review>> parameterizedTypeReference= new ParameterizedTypeReference<List<Review>>() {
+				@Override
+				public Type getType() {
+					return super.getType();
+				}
+			};
+			ResponseEntity<List<Review>> reviews= restTemplate.exchange(url, GET, null, parameterizedTypeReference);
+			return reviews.getBody();
+		} catch (HttpClientErrorException ex) {
+			log.warn("getReviews exception , {}", ex.getMessage());
+			return new ArrayList<>();
+		}
 	}
 
 	@Override
 	public void deleteReviews(int productId) {
 		// TODO Auto-generated method stub
+		try {
+			String url = reviewServiceUrl + "/" + productId;
+			restTemplate.delete(url);
 
+		} catch (HttpClientErrorException ex) {
+			throw httpClientException(ex);
+		}
 	}
 
 	@Override
 	public Recommend createRecommend(Recommend body) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+
+			String url = recommendServiceUrl;
+			HttpHeaders headers =new HttpHeaders();
+			headers.setContentType(MediaType.APPLICATION_JSON);
+			log.debug("create recommend url:{}", url);
+			log.debug("create recommend body:{}", body.toString());
+
+			HttpEntity<Recommend> entity =new HttpEntity<>(body, headers);
+
+			Recommend recommend = restTemplate.postForObject(url, entity, Recommend.class);
+			return recommend;
+		} catch (HttpClientErrorException ex) {
+			throw httpClientException(ex);
+		}
 	}
 
 	@Override
 	public List<Recommend> getRecommends(int productId) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			String url = recommendServiceUrl + "/" + productId;
+			ParameterizedTypeReference<List<Recommend>> parameterizedTypeReference= new ParameterizedTypeReference<List<Recommend>>() {
+				@Override
+				public Type getType() {
+					return super.getType();
+				}
+			};
+			ResponseEntity<List<Recommend>> recommends= restTemplate.exchange(url, GET, null, parameterizedTypeReference);
+			return recommends.getBody();
+		} catch (HttpClientErrorException ex) {
+			log.warn("getRecommends exception , {}", ex.getMessage());
+			return new ArrayList<>();
+		}
 	}
 
 	@Override
 	public void deleteRecommends(int productId) {
 		// TODO Auto-generated method stub
+		try {
+			String url = recommendServiceUrl + "/" + productId;
+			restTemplate.delete(url);
 
+		} catch (HttpClientErrorException ex) {
+			throw httpClientException(ex);
+		}
 	}
 
 	@Override
@@ -108,10 +181,14 @@ public class IntegrateModule
 		try {
 
 			String url = productServiceUrl;
-			
+			HttpHeaders headers =new HttpHeaders();
+			headers.setContentType(MediaType.APPLICATION_JSON);
 			log.debug("createProduct url:{}", url);
 			log.debug("createProduct body:{}", body.toString());
-			Product product = restTemplate.postForObject(url, body, Product.class);
+
+			HttpEntity<Product> entity =new HttpEntity<>(body, headers);
+
+ 			Product product = restTemplate.postForObject(url, entity, Product.class);
 			return product;
 		} catch (HttpClientErrorException ex) {
 			throw httpClientException(ex);
@@ -139,7 +216,6 @@ public class IntegrateModule
 		} catch (HttpClientErrorException ex) {
 			throw httpClientException(ex);
 		}
-
 	}
 
 }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleHome" value="$PROJECT_DIR$/../../../../util/gradle-7.3.3" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/api" />
+            <option value="$PROJECT_DIR$/cloud" />
+            <option value="$PROJECT_DIR$/cloud/eureka" />
+            <option value="$PROJECT_DIR$/services" />
+            <option value="$PROJECT_DIR$/services/composite" />
+            <option value="$PROJECT_DIR$/services/product" />
+            <option value="$PROJECT_DIR$/services/recommend" />
+            <option value="$PROJECT_DIR$/services/review" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

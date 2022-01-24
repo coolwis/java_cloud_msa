@@ -2,6 +2,7 @@ package com.psc.cloud.recommend.controller;
 
 import java.util.List;
 
+import com.psc.cloud.api.util.ServiceUtil;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mongodb.DuplicateKeyException;
@@ -22,6 +23,8 @@ public class RecommendController implements RecommendControllerInterface {
 
 	private final RecommendRepository repository;
 	private final RecommendMapper mapper;
+
+	private final ServiceUtil serviceUtil;
 
 	@Override
 	public Recommend createRecommend(Recommend body) {
@@ -44,6 +47,10 @@ public class RecommendController implements RecommendControllerInterface {
 		List<RecommendEntity> entity = repository.findByProductId(productId);
 				
 		List<Recommend> recommends = mapper.entityListToApiList(entity);
+
+		if(recommends !=null && recommends.size() > 0){
+			recommends.get(0).setServiceAddress(serviceUtil.getServiceAddress());
+		}
 		return recommends;
 	}
 

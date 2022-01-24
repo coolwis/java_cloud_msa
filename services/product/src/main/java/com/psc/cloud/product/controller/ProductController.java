@@ -1,5 +1,6 @@
 package com.psc.cloud.product.controller;
 
+import com.psc.cloud.api.util.ServiceUtil;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mongodb.DuplicateKeyException;
@@ -20,6 +21,7 @@ public class ProductController implements ProductControllerInterface {
 
 	private final ProductRepository repository;
 	private final ProductMapper mapper;
+	private ServiceUtil serviceUtil ;
 
 	@Override
 	public Product createProduct(Product body) {
@@ -43,6 +45,8 @@ public class ProductController implements ProductControllerInterface {
 		ProductEntity entity = repository.findByProductId(productId)
 				.orElseThrow(() -> new NotFoundException("no productId:" + productId));
 		Product product = mapper.entityToDto(entity);
+		product.setServiceAddress(serviceUtil.getServiceAddress());
+		log.debug("getProduct: {}", product.toString());
 		return product;
 	}
 

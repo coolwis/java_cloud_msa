@@ -1,6 +1,7 @@
 package com.psc.cloud.api.dto;
 
 import java.util.List;
+
 import lombok.*;
 
 @Getter
@@ -13,4 +14,5 @@ public class Composite {
     private String productName;
     private List<Recommend> recommendList;
     private List<Review> reviewList;
+    private ServiceAddress serviceAddress;
 }

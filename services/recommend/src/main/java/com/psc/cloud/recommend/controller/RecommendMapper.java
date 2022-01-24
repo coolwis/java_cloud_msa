@@ -12,7 +12,9 @@ import com.psc.cloud.recommend.domain.RecommendEntity;
 @Mapper(componentModel="spring")
 public interface RecommendMapper {
 
-	@Mappings({})
+	@Mappings({
+			@Mapping(target="serviceAddress", ignore = true)
+	})
 	Recommend entityToDto(RecommendEntity entity);
 	
 	@Mappings({

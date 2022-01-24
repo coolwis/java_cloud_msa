@@ -10,7 +10,9 @@ import com.psc.cloud.product.domain.ProductEntity;
 @Mapper(componentModel="spring")
 public interface ProductMapper {
 
-	@Mappings({})
+	@Mappings({
+			@Mapping(target="serviceAddress", ignore = true)
+	})
 	Product entityToDto(ProductEntity entity);
 	
 	@Mappings({

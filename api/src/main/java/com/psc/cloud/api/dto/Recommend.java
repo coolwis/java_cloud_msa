@@ -11,4 +11,5 @@ public class Recommend {
     private int recommendId;
     private String author;
     private String content;
+    private String serviceAddress;
 }

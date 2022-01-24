@@ -2,6 +2,7 @@ package com.psc.cloud.review.controller;
 
 import java.util.List;
 
+import com.psc.cloud.api.util.ServiceUtil;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,6 +22,7 @@ public class ReviewController implements ReviewControllerInterface {
 
 	private final ReviewRepository repository;
 	private final ReviewMapper mapper;
+	private final ServiceUtil serviceUtil ;
 
 	@Override
 	public Review createReview(Review body) {
@@ -42,8 +44,13 @@ public class ReviewController implements ReviewControllerInterface {
 		if (productId < 1) throw new InvalidInputException("Invalid productId:" + productId);
 		List<ReviewEntity> entity = repository.findByProductId(productId);
 				
-		List<Review> Reviews = mapper.entityListToDtoList(entity);
-		return Reviews;
+		List<Review> reviews = mapper.entityListToDtoList(entity);
+		log.debug("getReviews: {}" , productId);
+		if(reviews !=null && reviews.size() > 0) {
+			reviews.get(0).setServiceAddress(serviceUtil.getServiceAddress());
+		}
+
+		return reviews;
 	}
 
 	@Override
