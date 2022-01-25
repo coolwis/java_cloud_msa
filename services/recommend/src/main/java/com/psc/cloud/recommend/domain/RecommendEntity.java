@@ -20,7 +20,7 @@ public class RecommendEntity {
 
 	
 	@Id
-	private Integer id; 
+	private String id;
 	@Version
 	private Integer version;
 	private int productId;
