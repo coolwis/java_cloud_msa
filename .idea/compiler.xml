@@ -30,6 +30,9 @@
         <module name="java_cloud_eureka.services.review.main" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="11" />
+    <bytecodeTargetLevel target="11">
+      <module name="java_cloud_eureka.gateway.main" target="16" />
+      <module name="java_cloud_eureka.gateway.test" target="16" />
+    </bytecodeTargetLevel>
   </component>
 </project>

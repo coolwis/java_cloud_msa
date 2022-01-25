@@ -21,12 +21,7 @@ docker run -d --rm --name eureka \
     -p 8761:8761 \
     eureka
 
-sudo docker run -d --rm --name composite \
-		--network apps_net \
-		-e SPRING_PROFILES_ACTIVE=docker \
-		-p 8080:8080 \
-		composite
-		
+
 		
 sudo docker run -d --rm --name product \
 		--network apps_net \
@@ -43,4 +38,17 @@ sudo docker run -d --rm --name recommend \
 		-e SPRING_PROFILES_ACTIVE=docker \
 		recommend
 		
-		
+sudo docker run -d --rm --name composite \
+		--network apps_net \
+		-e SPRING_PROFILES_ACTIVE=docker \
+		composite
+
+sudo docker run -d --rm --name gateway \
+		--network apps_net \
+		-e SPRING_PROFILES_ACTIVE=docker \
+		-e SERVER_SSL_KEY_STORE=file:/keystore/gateway-docker.p12 \
+		-e SERVER_SSL_KEY_STORE_PASSWORD=password \
+		-p 443:8080 \
+		gateway
+
+docker cp $PWD/keystore gateway:/keystore
