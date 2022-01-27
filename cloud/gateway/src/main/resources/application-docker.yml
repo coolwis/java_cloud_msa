@@ -1,3 +1,11 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: composite
+          uri: lb://composite
+          predicates:
+            - Path=/composite/**
 eureka:
   client:
     serviceUrl:
