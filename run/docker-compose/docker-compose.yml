@@ -40,7 +40,7 @@ services:
     mem_limit: 350m
     environment:
       - SPRING_PROFILES_ACTIVE=docker
-      -
+
   gateway:
     build: ../../cloud/gateway
     mem_limit: 350m
