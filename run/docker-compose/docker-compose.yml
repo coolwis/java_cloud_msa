@@ -1,6 +1,5 @@
 version: '2.1'
 
-
 services:
   eureka:
     build: ../../cloud/eureka
@@ -15,7 +14,6 @@ services:
     depends_on:
       mongoDB:
         condition: service_healthy
-
   recommend:
     build: ../../services/recommend
     mem_limit: 350m
@@ -24,8 +22,6 @@ services:
     depends_on:
       mongoDB:
         condition: service_healthy
-
-          
   review:
     build: ../../services/review
     mem_limit: 350m
@@ -34,13 +30,11 @@ services:
     depends_on:
       mysqldb:
         condition: service_healthy
-  
   composite:
     build: ../../services/composite
     mem_limit: 350m
     environment:
       - SPRING_PROFILES_ACTIVE=docker
-
   gateway:
     build: ../../cloud/gateway
     mem_limit: 350m
